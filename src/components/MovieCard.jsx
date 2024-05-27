@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import imdb from "../assets/imdb.svg";
+import { useMovie } from "../context/MovieProvider";
 
 const MovieCard = ({
   id,
@@ -10,10 +11,15 @@ const MovieCard = ({
   release_date,
 }) => {
   const navigate = useNavigate();
+  const { getMovieDetail,getMovieVideos } = useMovie();
   return (
     <div
       className="group relative block bg-black w-[320px] h-[450px] sm:w-[230px] sm:h-[370px] rounded-md shadow-md shadow-slate-600 cursor-pointer "
-      onClick={() => navigate(`/details/${id}`)}
+      onClick={() => {
+        navigate(`/details/${id}`);
+        getMovieDetail(id);
+        getMovieVideos(id);
+      }}
     >
       <img
         alt=""
